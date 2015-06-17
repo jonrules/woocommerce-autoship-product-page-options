@@ -13,7 +13,14 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( 'woocommerce-autoship/woocommerce-autoship.php' ) ) {
 	
 	function wc_autoship_product_page_install() {
-
+		// Add default settings
+		add_option( 'wc_autoship_product_page_layout', 'radio-buttons' );
+		add_option( 'wc_autoship_product_page_frequency_options', array(
+			'7' => 'Weekly',
+			'30' => 'Monthly',
+			'60' => 'Bi-Monthly',
+			'90' => 'Quarterly'
+		) );
 	}
 	register_activation_hook( __FILE__, 'wc_autoship_product_page_install' );
 	
