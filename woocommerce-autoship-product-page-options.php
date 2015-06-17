@@ -34,7 +34,22 @@ if ( is_plugin_active( 'woocommerce-autoship/woocommerce-autoship.php' ) ) {
 	}
 	register_uninstall_hook( __FILE__, 'wc_autoship_product_page_uninstall' );
 	
+	function wc_autoship_product_page_admin_scripts() {
+		wp_enqueue_style( 'wc-autoship-product-page-admin', plugin_dir_url( __FILE__ ) . 'css/admin.css', array(), '1.0.0' );
+		wp_enqueue_script( 'jquery-ui-core' );
+		wp_enqueue_script( 'jquery-ui-autocomplete' );
+		wp_enqueue_script( 'wc-autoship-product-page-admin', plugin_dir_url( __FILE__ ) . 'js/admin.js', array('jquery'), '1.0.0', true );
+	}
+	add_action( 'admin_enqueue_scripts', 'wc_autoship_product_page_admin_scripts' );
+	
 	function wc_autoship_product_page_settings( $settings ) {
+		$settings[] = array(
+			'title' => __( 'Product Page Autoship Options', 'wc-autoship-product-page' ),
+			'desc' => __( 'Customize the autoship options on the product page', 'wc-autoship-product-page' ),
+			'desc_tip' => false,
+			'type' => 'title',
+			'id' => 'wc_autoship_product_page_title'
+		);
 		$settings[] = array(
 			'name' => __( 'Product Page Autoship Options Layout', 'wc-autoship-product-page' ),
 			'desc' => __( 'The layout for autoship options on the product page', 'wc-autoship-product-page' ),
@@ -53,6 +68,10 @@ if ( is_plugin_active( 'woocommerce-autoship/woocommerce-autoship.php' ) ) {
 			'desc_tip' => true,
 			'type' => 'wc_autoship_product_page_frequency_options',
 			'id' => 'wc_autoship_product_page_frequency_options'
+		);
+		$settings[] = array(
+			'type' => 'sectionend',
+			'id' => 'wc_autoship_product_page_sectionend'
 		);
 		return $settings;
 	}
