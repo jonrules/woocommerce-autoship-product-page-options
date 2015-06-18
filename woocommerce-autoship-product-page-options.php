@@ -3,7 +3,7 @@
 Plugin Name: WC Autoship Product Page Options
 Plugin URI: http://wooautoship.com
 Description: Customize the autoship options on the product page.
-Version: 1.0
+Version: 1.0.0
 Author: Patterns in the Cloud
 Author URI: http://patternsinthecloud.com
 License: Single-site
