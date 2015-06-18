@@ -1,2 +1,2 @@
 # WC Autoship Product Page Options
-Select autoship display options for the product page.
+Customize the autoship options on the product page.
