@@ -1,7 +1,14 @@
 # WC Autoship Product Page Options
 Customize the autoship options on the product page.
 
-Homepage: https://wooautoship.com/downloads/wc-auto-ship-product-page-options/
+Version 1.0.0<br />
+Published: June 22, 2015<br />
+Homepage: https://wooautoship.com/downloads/wc-auto-ship-product-page-options/<br />
+© 2015 Patterns In the Cloud,
+http://patternsinthecloud.com<br />
+ Contact
+support@patternsinthecloud.com for
+additional support. 
 
 **Note:** This plugin requires WC Auto-Ship 3.0 or higher (https://wooautoship.com)
 
