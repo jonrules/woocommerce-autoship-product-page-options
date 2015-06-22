@@ -57,7 +57,7 @@ if ( is_plugin_active( 'woocommerce-autoship/woocommerce-autoship.php' ) ) {
 			'type' => 'select',
 			'id' => 'wc_autoship_product_page_layout',
 			'options' => array(
-				'' => __( 'Default (Disable custom product page options)', 'wc-autoship-product-page' ),
+				'' => __( 'Disable custom options', 'wc-autoship-product-page' ),
 				'radio-buttons' => __( 'Radio Buttons', 'wc-autoship-product-page' ),
 				'select-box' => __( 'Select Box', 'wc-autoship-product-page' )
 			)
