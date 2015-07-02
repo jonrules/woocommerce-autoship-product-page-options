@@ -7,7 +7,11 @@
 	<div class="wc-autoship-options">
 		<?php 
 		$price = $product->get_price();
-		$autoship_price = get_post_meta( $product->id, '_wc_autoship_price', true );
+		$autoship_price = apply_filters( 'wc_autoship_price',
+			get_post_meta( $product->id, '_wc_autoship_price', true ),
+			$product->id,
+			0
+		);
 		$autoship_min_frequency = get_post_meta( $product->id, '_wc_autoship_min_frequency', true );
 		$autoship_max_frequency = get_post_meta( $product->id, '_wc_autoship_max_frequency', true );
 		$autoship_default_frequency = get_post_meta( $product->id, '_wc_autoship_default_frequency', true );
