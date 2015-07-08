@@ -10,7 +10,8 @@
 		$autoship_price = apply_filters( 'wc_autoship_price',
 			get_post_meta( $product->id, '_wc_autoship_price', true ),
 			$product->id,
-			0
+			0,
+			get_current_user_id()
 		);
 		$autoship_min_frequency = get_post_meta( $product->id, '_wc_autoship_min_frequency', true );
 		$autoship_max_frequency = get_post_meta( $product->id, '_wc_autoship_max_frequency', true );

@@ -24,7 +24,8 @@
 				$autoship_price = apply_filters( 'wc_autoship_price',
 					get_post_meta( $variation['variation_id'], '_wc_autoship_price', true ),
 					$variation['variation_id'],
-					0
+					0,
+					get_current_user_id()
 				);
 				break;
 			}
