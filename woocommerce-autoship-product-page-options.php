@@ -3,11 +3,13 @@
 Plugin Name: WC Autoship Product Page Options
 Plugin URI: http://wooautoship.com
 Description: Customize the autoship options on the product page.
-Version: 1.0.0
+Version: 1.0.1
 Author: Patterns in the Cloud
 Author URI: http://patternsinthecloud.com
 License: Single-site
 */
+
+define( 'WC_Autoship_Product_Page_Options_Version', '1.0.1' );
 
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( 'woocommerce-autoship/woocommerce-autoship.php' ) ) {
@@ -35,10 +37,10 @@ if ( is_plugin_active( 'woocommerce-autoship/woocommerce-autoship.php' ) ) {
 	register_uninstall_hook( __FILE__, 'wc_autoship_product_page_uninstall' );
 	
 	function wc_autoship_product_page_admin_scripts() {
-		wp_enqueue_style( 'wc-autoship-product-page-admin', plugin_dir_url( __FILE__ ) . 'css/admin.css', array(), '1.0.0' );
+		wp_enqueue_style( 'wc-autoship-product-page-admin', plugin_dir_url( __FILE__ ) . 'css/admin.css', array(), WC_Autoship_Product_Page_Options_Version );
 		wp_enqueue_script( 'jquery-ui-core' );
 		wp_enqueue_script( 'jquery-ui-autocomplete' );
-		wp_enqueue_script( 'wc-autoship-product-page-admin', plugin_dir_url( __FILE__ ) . 'js/admin.js', array('jquery'), '1.0.0', true );
+		wp_enqueue_script( 'wc-autoship-product-page-admin', plugin_dir_url( __FILE__ ) . 'js/admin.js', array('jquery'), WC_Autoship_Product_Page_Options_Version, true );
 	}
 	add_action( 'admin_enqueue_scripts', 'wc_autoship_product_page_admin_scripts' );
 	
