@@ -40,7 +40,7 @@ jQuery(function ($) {
 		// Frequency column
 		var $frequencyColumn = $('<td class="wc-autoship-frequency-option-frequency-column"></td>');
 		var $input = $('<input type="hidden" />')
-			.attr('name', 'wc_autoship_product_page_frequency_options[' + frequency + ']')
+			.attr('name', 'wc_autoship_product_page_frequency_options_array[' + frequency + ']')
 			.val(name);
 		$frequencyColumn.append($input);
 		$frequencyColumn.append($('<span></span>').text(frequency));

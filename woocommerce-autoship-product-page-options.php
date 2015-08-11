@@ -110,4 +110,16 @@ if ( is_plugin_active( 'woocommerce-autoship/woocommerce-autoship.php' ) ) {
 		extract( $vars );
 		include ( wc_autoship_product_page_get_plugin_template_path( $relative_path, $vars ) );
 	}
+	
+	function wc_autoship_product_page_options_sanitize_value( $value, $option, $raw_value ) {
+		if ( isset( $_POST['wc_autoship_product_page_frequency_options_array'] ) ) {
+			return $_POST['wc_autoship_product_page_frequency_options_array'];
+		}
+		return array();
+	}
+	add_filter( 'woocommerce_admin_settings_sanitize_option_wc_autoship_product_page_frequency_options',
+		'wc_autoship_product_page_options_sanitize_value',
+		10, 
+		3
+	);
 }
