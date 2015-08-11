@@ -4,7 +4,7 @@
 		<?php echo $description['tooltip_html']; ?>
 	</th>
 	<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
-		<input type="hidden" name="wc_autoship_product_page_frequency_options" value="" />
+		<input type="hidden" name="wc_autoship_product_page_frequency_options" value="yes" />
 		<table id="wc-autoship-product-page-frequency-options-table">
 			<thead>
 				<tr>
@@ -23,7 +23,7 @@
 					<?php foreach ( $frequency_options as $frequency => $name ): ?>
 						<tr id="wc-autoship-frequency-option-<?php echo esc_attr( $frequency ); ?>" class="wc-autoship-frequency-option" data-frequency="<?php echo esc_attr( $frequency ); ?>">
 							<td class="wc-autoship-frequency-option-frequency-column">
-								<input type="hidden" name="wc_autoship_product_page_frequency_options[<?php echo esc_attr( $frequency ); ?>]"
+								<input type="hidden" name="wc_autoship_product_page_frequency_options_array[<?php echo esc_attr( $frequency ); ?>]"
 									value="<?php echo esc_attr( $name ); ?>" />
 								<span><?php echo esc_html( $frequency ); ?></span>
 							</td>

@@ -2,6 +2,8 @@
 /* @var $product WC_Product */
 ?>
 
+<?php do_action( 'wc_autoship_before_product_autoship_options', $product->id ); ?>
+
 <div class="wc-autoship-container">
 
 	<div class="wc-autoship-options">
@@ -57,6 +59,8 @@
 	</div>
 
 </div>
+
+<?php do_action( 'wc_autoship_after_product_autoship_options', $product->id ); ?>
 
 <script>
 jQuery(function ($) {
