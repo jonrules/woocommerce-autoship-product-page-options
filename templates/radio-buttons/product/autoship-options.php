@@ -13,7 +13,8 @@
 			get_post_meta( $product->id, '_wc_autoship_price', true ),
 			$product->id,
 			0,
-			get_current_user_id()
+			get_current_user_id(),
+			0
 		);
 		$autoship_min_frequency = get_post_meta( $product->id, '_wc_autoship_min_frequency', true );
 		$autoship_max_frequency = get_post_meta( $product->id, '_wc_autoship_max_frequency', true );
