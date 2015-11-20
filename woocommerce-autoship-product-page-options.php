@@ -69,6 +69,15 @@ function wc_autoship_product_page_settings( $settings ) {
 		)
 	);
 	$settings[] = array(
+		'name' => __( 'Product Page Autoship Description', 'wc-autoship-product-page' ),
+		'desc' => __( 'Enter a custom description for the autoship options on the product page.', 'wc-autoship-product-page' ),
+		'desc_tip' => true,
+		'type' => 'textarea',
+		'id' => 'wc_autoship_product_page_description',
+		'placeholder' => wc_autoship_product_page_get_default_description(),
+		'css' => 'min-width: 300px;'
+	);
+	$settings[] = array(
 		'name' => __( 'Product Page Autoship Options', 'wc-autoship-product-page' ),
 		'desc' => __( 'The autoship options to show on the product page', 'wc-autoship-product-page' ),
 		'desc_tip' => true,
@@ -141,3 +150,15 @@ add_filter( 'woocommerce_admin_settings_sanitize_option_wc_autoship_product_page
 	10,
 	3
 );
+
+function wc_autoship_product_page_get_description() {
+	$description = get_option( 'wc_autoship_product_page_description' );
+	if ( $description ) {
+		return do_shortcode( $description );
+	}
+	return wc_autoship_product_page_get_default_description();
+}
+
+function wc_autoship_product_page_get_default_description() {
+	return __( 'Select an Auto-Ship Frequency to add this item to auto-ship.', 'wc-autoship-product-page' );
+}

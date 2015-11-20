@@ -27,7 +27,7 @@
 	
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<p class="wc-autoship-select-frequency"><?php echo __( 'Select an Auto-Ship Frequency to add this item to auto-ship.', 'wc-autoship-product-page' ); ?></p>
+				<p class="wc-autoship-select-frequency"><?php echo wc_autoship_product_page_get_description(); ?></p>
 				<?php if ( ! empty( $autoship_price ) && $price != $autoship_price ): ?>
 					<h3 class="wc-autoship-price"><?php echo __( 'Auto-Ship price:', 'wc-autoship-product-page'); ?> <?php echo wc_price( $autoship_price ); ?></h3>
 				<?php endif; ?>				
