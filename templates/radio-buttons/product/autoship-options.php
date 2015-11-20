@@ -36,21 +36,22 @@
 						<?php foreach ( $frequency_options as $days => $name ): ?>
 							<?php if ( $days < $autoship_min_frequency || $days > $autoship_max_frequency ) continue; ?>
 							<div class="wc-autoship-frequency-radio radio">
-								<label for="wc_autoship_frequency_<?php echo esc_html( $days ); ?>">
+								<label for="wc_autoship_frequency_<?php echo esc_attr( $product->id ); ?>_<?php echo esc_html( $days ); ?>">
 									<input type="radio" name="wc_autoship_frequency" class="wc-autoship-frequency-input-radio"
-										id="wc_autoship_frequency_<?php echo esc_html( $days ); ?>" 
+										id="wc_autoship_frequency_<?php echo esc_attr( $product->id ); ?>_<?php echo esc_html( $days ); ?>"
 										value="<?php echo esc_html( $days ); ?>"
-										<?php echo checked( $days, $autoship_default_frequency ); ?> /> 
+										<?php checked( $days, $autoship_default_frequency ); ?> />
 									<?php echo esc_html( $name ), ' ', __( "(Every $days days)", 'wc-autoship-product-page' ); ?>
 								</label>
 							</div>
 						<?php endforeach; ?>
 					<?php endif; ?>
-					<div id="wc-autoship-frequency-radio-no-autoship" class="wc-autoship-frequency-radio radio" <?php if ( empty( $autoship_default_frequency ) ) echo 'style="display: none"'; ?>>
-						<label for="wc_autoship_frequency_no_autoship">
+					<div class="wc-autoship-frequency-radio radio">
+						<label for="wc_autoship_frequency_<?php echo esc_attr( $product->id ); ?>_no_autoship">
 							<input type="radio" name="wc_autoship_frequency" class="wc-autoship-frequency-input-radio"
-								id="wc_autoship_frequency_no_autoship" 
-								value="" /> 
+								id="wc_autoship_frequency_<?php echo esc_attr( $product->id ); ?>_no_autoship"
+								value=""
+								<?php checked( true, empty( $autoship_default_frequency ) ); ?> />
 							<?php echo __( "No auto-ship. Make this a one-time purchase.", 'wc-autoship-product-page' ); ?>
 						</label>
 					</div>
@@ -62,11 +63,3 @@
 </div>
 
 <?php do_action( 'wc_autoship_after_product_autoship_options', $product->id ); ?>
-
-<script>
-jQuery(function ($) {
-	$('.wc-autoship-frequency-input-radio').click(function () {
-		$('#wc-autoship-frequency-radio-no-autoship').show();
-	});
-});
-</script>

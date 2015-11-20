@@ -43,8 +43,8 @@
 				<p class="wc-autoship-selectfrequency"><?php echo __( 'Select an Auto-Ship Frequency to add this item to auto-ship.', 'wc-autoship-product-page' ); ?></p>
 				<h3 class="wc-autoship-price" <?php if ( empty( $autoship_price ) ) echo 'style="display:none"'; ?>><?php echo __( 'Auto-Ship price:', 'wc-autoship-product-page'); ?> <?php echo wc_price( $autoship_price ); ?></h3>			
 				<p class="wc-autoship-frequency">
-					<label for="wc_autoship_frequency"><?php echo __( 'Auto-Ship Frequency:', 'wc-autoship-product-page' ); ?></label>
-					<select name="wc_autoship_frequency" id="wc_autoship_frequency">
+					<label for="wc_autoship_frequency_<?php echo esc_attr( $product->id ); ?>"><?php echo __( 'Auto-Ship Frequency:', 'wc-autoship-product-page' ); ?></label>
+					<select name="wc_autoship_frequency" id="wc_autoship_frequency_<?php echo esc_attr( $product->id ); ?>">
 						<option value="">&mdash;<?php echo __( 'SELECT', 'wc-autoship-product-page' ); ?>&mdash;</option>
 						<?php if ( ! empty( $frequency_options ) ): ?>
 							<?php foreach ( $frequency_options as $days => $name ): ?>
