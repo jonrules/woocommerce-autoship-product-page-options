@@ -7,35 +7,9 @@
 <div class="wc-autoship-container">
 
 	<div class="wc-autoship-options">
-		<?php 
-		$autoship_min_frequency = get_post_meta( $product->id, '_wc_autoship_min_frequency', true );
-		$autoship_max_frequency = get_post_meta( $product->id, '_wc_autoship_max_frequency', true );
-		$autoship_default_frequency = get_post_meta( $product->id, '_wc_autoship_default_frequency', true );
-		$autoship_price = '';
-		$default_attributes = $product->get_variation_default_attributes();
-		if ( ! empty( $default_attributes ) ) {
-			$variations = $product->get_available_variations();
-			foreach ( $variations as $variation ) {
-				foreach ( $default_attributes as $name => $value ) {
-					if ( isset( $variation['attributes'][ 'attribute_' . $name ] ) && $variation['attributes'][ 'attribute_' . $name ] == '' ) {
-						continue;
-					} elseif ( ! isset( $variation['attributes'][ 'attribute_' . $name ] ) || $variation['attributes'][ 'attribute_' . $name ] != $value ) {
-						continue 2;
-					}
-				}
-				$autoship_price = apply_filters( 'wc_autoship_price',
-					get_post_meta( $variation['variation_id'], '_wc_autoship_price', true ),
-					$variation['variation_id'],
-					0,
-					get_current_user_id()
-				);
-				break;
-			}
-		}
-		
+		<?php
 		// Frequency options
 		$frequency_options = get_option( 'wc_autoship_product_page_frequency_options' );
-		
 		?>
 	
 		<div class="panel panel-default">

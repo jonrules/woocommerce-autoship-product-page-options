@@ -8,27 +8,14 @@
 
 	<div class="wc-autoship-options">
 		<?php 
-		$price = $product->get_price();
-		$autoship_price = apply_filters( 'wc_autoship_price',
-			get_post_meta( $product->id, '_wc_autoship_price', true ),
-			$product->id,
-			0,
-			get_current_user_id(),
-			0
-		);
-		$autoship_min_frequency = get_post_meta( $product->id, '_wc_autoship_min_frequency', true );
-		$autoship_max_frequency = get_post_meta( $product->id, '_wc_autoship_max_frequency', true );
-		$autoship_default_frequency = get_post_meta( $product->id, '_wc_autoship_default_frequency', true );
-		
 		// Frequency options
 		$frequency_options = get_option( 'wc_autoship_product_page_frequency_options' );
-		
 		?>
 	
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<p class="wc-autoship-select-frequency"><?php echo wc_autoship_product_page_get_description(); ?></p>
-				<?php if ( ! empty( $autoship_price ) && $price != $autoship_price ): ?>
+				<?php if ( ! empty( $autoship_price ) && $product->get_price() != $autoship_price ): ?>
 					<h3 class="wc-autoship-price"><?php echo __( 'Auto-Ship price:', 'wc-autoship-product-page'); ?> <?php echo wc_price( $autoship_price ); ?></h3>
 				<?php endif; ?>				
 				<div class="wc-autoship-frequency wc-autoship-frequency-radio-options">
