@@ -116,6 +116,20 @@ function wc_autoship_product_page_frequency_options( $value ) {
 }
 add_action( 'woocommerce_admin_field_wc_autoship_product_page_frequency_options', 'wc_autoship_product_page_frequency_options' );
 
+function wc_autoship_product_page_options_available_frequencies( $frequencies, $schedule_id ) {
+	$frequency_options = get_option( 'wc_autoship_product_page_frequency_options' );
+	foreach ( $frequencies as $key => $value ) {
+		 foreach ( $frequency_options as $frequency_option => $title_option ) {
+			 if ( $frequencies[$key]['frequency'] == $frequency_option ) {
+				 $frequencies[$key]['title'] = $title_option;
+			 }
+		 }
+
+	}
+	return  $frequencies;
+}
+add_filter( 'wc_autoship_schedule_available_frequencies', 'wc_autoship_product_page_options_available_frequencies', 10, 2 );
+
 function wc_autoship_product_page_template( $path, $template, $vars ) {
 	$layout = get_option( 'wc_autoship_product_page_layout' );
 	if ( empty( $layout ) ) {
