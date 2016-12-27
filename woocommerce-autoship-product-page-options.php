@@ -116,19 +116,38 @@ function wc_autoship_product_page_frequency_options( $value ) {
 }
 add_action( 'woocommerce_admin_field_wc_autoship_product_page_frequency_options', 'wc_autoship_product_page_frequency_options' );
 
-function wc_autoship_product_page_options_available_frequencies( $frequencies, $schedule_id ) {
+function wc_autoship_product_page_options_available_frequencies( $available_frequencies, $schedule_id ) {
 	$frequency_options = get_option( 'wc_autoship_product_page_frequency_options' );
-	foreach ( $frequencies as $key => $value ) {
-		 foreach ( $frequency_options as $frequency_option => $title_option ) {
-			 if ( $frequencies[$key]['frequency'] == $frequency_option ) {
-				 $frequencies[$key]['title'] = $title_option;
-			 }
-		 }
-
+	if ( empty( $frequency_options ) ) {
+		return $available_frequencies;
 	}
-	return  $frequencies;
+
+	$titled_frequencies = array();
+	foreach ( $frequency_options as $frequency => $title ) {
+		if ( ! wc_autoship_product_page_options_frequency_is_available( $frequency, $available_frequencies ) ) {
+			continue;
+		}
+		$option = array(
+			'frequency' => $frequency,
+			'title' => $title
+		);
+		$titled_frequencies[] = $option;
+	}
+	if ( ! empty( $titled_frequencies ) ) {
+		return $titled_frequencies;
+	}
+	return $available_frequencies;
 }
 add_filter( 'wc_autoship_schedule_available_frequencies', 'wc_autoship_product_page_options_available_frequencies', 10, 2 );
+
+function wc_autoship_product_page_options_frequency_is_available( $frequency, $available_frequencies ) {
+	foreach ( $available_frequencies as $f ) {
+		if ( $frequency == $f['frequency'] ) {
+			return true;
+		}
+	}
+	return false;
+}
 
 function wc_autoship_product_page_template( $path, $template, $vars ) {
 	$layout = get_option( 'wc_autoship_product_page_layout' );
