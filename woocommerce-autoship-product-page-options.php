@@ -3,13 +3,13 @@
 Plugin Name: WC Autoship Product Page Options
 Plugin URI: http://wooautoship.com
 Description: Customize the autoship options on the product page.
-Version: 1.0.5-beta1
+Version: 1.1.0
 Author: Patterns in the Cloud
 Author URI: http://patternsinthecloud.com
 License: Single-site
 */
 
-define( 'WC_Autoship_Product_Page_Options_Version', '1.0.4' );
+define( 'WC_Autoship_Product_Page_Options_Version', '1.1.0' );
 
 function wc_autoship_product_page_install() {
 	// Add default settings
@@ -115,6 +115,39 @@ function wc_autoship_product_page_frequency_options( $value ) {
 	wc_autoship_product_page_include_plugin_template( $relative_path, $vars );
 }
 add_action( 'woocommerce_admin_field_wc_autoship_product_page_frequency_options', 'wc_autoship_product_page_frequency_options' );
+
+function wc_autoship_product_page_options_available_frequencies( $available_frequencies, $schedule_id ) {
+	$frequency_options = get_option( 'wc_autoship_product_page_frequency_options' );
+	if ( empty( $frequency_options ) ) {
+		return $available_frequencies;
+	}
+
+	$titled_frequencies = array();
+	foreach ( $frequency_options as $frequency => $title ) {
+		if ( ! wc_autoship_product_page_options_frequency_is_available( $frequency, $available_frequencies ) ) {
+			continue;
+		}
+		$option = array(
+			'frequency' => $frequency,
+			'title' => $title
+		);
+		$titled_frequencies[] = $option;
+	}
+	if ( ! empty( $titled_frequencies ) ) {
+		return $titled_frequencies;
+	}
+	return $available_frequencies;
+}
+add_filter( 'wc_autoship_schedule_available_frequencies', 'wc_autoship_product_page_options_available_frequencies', 10, 2 );
+
+function wc_autoship_product_page_options_frequency_is_available( $frequency, $available_frequencies ) {
+	foreach ( $available_frequencies as $f ) {
+		if ( $frequency == $f['frequency'] ) {
+			return true;
+		}
+	}
+	return false;
+}
 
 function wc_autoship_product_page_template( $path, $template, $vars ) {
 	$layout = get_option( 'wc_autoship_product_page_layout' );
