@@ -3,7 +3,7 @@
 ?>
 
 <?php 
-$product_id = method_exists( $product, 'get_id' ) ? $product->get_id() : $product->id;
+$product_id = $product->get_id();
 do_action( 'wc_autoship_before_product_autoship_options', $product_id ); 
 
 ?>

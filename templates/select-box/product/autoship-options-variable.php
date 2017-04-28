@@ -3,7 +3,15 @@
 ?>
 
 <?php
-$product_id = method_exists( $product, 'get_id' ) ? $product->get_id() : $product->id;
+$wc_3 = false;
+if ( function_exists( 'WC' ) ) {
+	$version = WC()->version;
+	if ( version_compare( $version, '3.0.0' ) >= 0 ) { // true if we are running WC 3+
+		$wc_3 = true;
+	}
+}
+$product_id = $wc_3 ? $product->get_id() : $product->variation_id;
+
 do_action( 'wc_autoship_before_product_autoship_options_variable', $product_id );
 
 ?>
