@@ -6,7 +6,7 @@
 $wc_3 = false;
 if ( function_exists( 'WC' ) ) {
 	$version = WC()->version;
-	if ( version_compare( $version, '3.0.0' ) >= 0 ) { // true if we are running WC 3+
+	if ( version_compare( $version, '3.0.0', '>=' ) ) { // true if we are running WC 3+
 		$wc_3 = true;
 	}
 }
