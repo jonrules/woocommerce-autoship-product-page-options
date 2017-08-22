@@ -43,7 +43,14 @@ do_action( 'wc_autoship_before_product_autoship_options', $product_id );
 								id="wc_autoship_frequency_<?php echo esc_attr( $product_id ); ?>_no_autoship"
 								value=""
 								<?php checked( true, empty( $autoship_default_frequency ) ); ?> />
-							<?php echo __( "No auto-ship. Make this a one-time purchase.", 'wc-autoship-product-page' ); ?>
+							<?php
+								$no_autoship_option_name = "No auto-ship. Make this a one-time purchase.";
+								if ( function_exists( 'wc_autoship_get_no_autoship_option_name' ) ) {
+									$no_autoship_option_name = wc_autoship_get_no_autoship_option_name();
+								}
+							?>
+
+							<?php echo esc_html( __( $no_autoship_option_name, 'wc-autoship-product-page' ) ); ?>
 						</label>
 					</div>
 				</div>
