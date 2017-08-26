@@ -31,7 +31,7 @@ do_action( 'wc_autoship_before_product_autoship_options_variable', $product_id )
 				<p class="wc-autoship-frequency">
 					<label for="wc_autoship_frequency_<?php echo esc_attr( $product_id ); ?>"><?php echo __( 'Auto-Ship Frequency:', 'wc-autoship-product-page' ); ?></label>
 					<select name="wc_autoship_frequency" id="wc_autoship_frequency_<?php echo esc_attr( $product_id ); ?>">
-						<option value="">&mdash;<?php echo __( 'SELECT', 'wc-autoship-product-page' ); ?>&mdash;</option>
+						<option value="">&mdash;<?php echo esc_html( __( wc_autoship_product_page_get_no_autoship_name(), 'wc-autoship-product-page' ) ); ?>&mdash;</option>
 						<?php if ( ! empty( $frequency_options ) ): ?>
 							<?php foreach ( $frequency_options as $days => $name ): ?>
 								<?php if ( $days < $autoship_min_frequency || $days > $autoship_max_frequency ) continue; ?>

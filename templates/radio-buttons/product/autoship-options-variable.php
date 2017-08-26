@@ -49,7 +49,7 @@ do_action( 'wc_autoship_before_product_autoship_options_variable', $product_id )
 								id="wc_autoship_frequency_<?php echo esc_attr( $product_id ); ?>_no_autoship"
 								value=""
 								<?php checked( true, empty( $autoship_default_frequency ) ); ?> />
-							<?php echo __( "No auto-ship. Make this a one-time purchase.", 'wc-autoship-product-page' ); ?>
+							<?php echo esc_html( __( wc_autoship_product_page_get_no_autoship_name(), 'wc-autoship-product-page' ) ); ?>
 						</label>
 					</div>
 				</div>

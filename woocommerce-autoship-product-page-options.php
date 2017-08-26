@@ -200,3 +200,10 @@ function wc_autoship_product_page_get_description() {
 function wc_autoship_product_page_get_default_description() {
 	return __( 'Select an Auto-Ship Frequency to add this item to auto-ship.', 'wc-autoship-product-page' );
 }
+
+function wc_autoship_product_page_get_no_autoship_name() {
+	if ( function_exists( 'wc_autoship_get_no_autoship_option_name' ) ) {
+		return wc_autoship_get_no_autoship_option_name();
+	}
+	return 'No Autoship';
+}
