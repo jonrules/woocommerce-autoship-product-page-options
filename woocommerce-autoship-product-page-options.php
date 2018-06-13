@@ -3,13 +3,13 @@
 Plugin Name: WC Autoship Product Page Options
 Plugin URI: http://wooautoship.com
 Description: Customize the autoship options on the product page.
-Version: 1.1.2
+Version: 1.0.0
 Author: Patterns in the Cloud
 Author URI: http://patternsinthecloud.com
 License: Single-site
 */
 
-define( 'WC_Autoship_Product_Page_Options_Version', '1.1.2' );
+define( 'WC_Autoship_Product_Page_Options_Version', '1.0.0' );
 
 function wc_autoship_product_page_install() {
 	// Add default settings
@@ -207,3 +207,43 @@ function wc_autoship_product_page_get_no_autoship_name() {
 	}
 	return 'No Autoship';
 }
+
+function wc_as_page_options_updater() {
+	$addon_license_keys = apply_filters( 'wc_autoship_addon_license_keys', array() );
+	$item_name = "WC Autoship Product Page Options";
+
+
+	if ( ! isset( $addon_license_keys[ 'wc_autoship_product_page_license_key' ] ) ) {
+		# we do not have license show some message
+		return;
+	}else{
+		if(!isset($addon_license_keys[ 'wc_autoship_product_page_license_key' ]['license'])){
+			# we do not have license show some message
+			return;
+		}else{
+			$license_key = $addon_license_keys[ 'wc_autoship_product_page_license_key' ]['license'];
+		}
+	}
+
+	if ( empty( $license_key ) || empty($item_name) ) {
+		# license field is empty, show some message
+		return;
+	}
+
+	#This will make sure that code does not break the website
+	if ( function_exists( 'wc_autoship_get_licensing_url' ) ) {
+
+		require_once( 'edd/wc-autoship-plugin-updater.php' );
+
+		new WC_AS_PAGE_OPTIONS_Plugin_Updater( wc_autoship_get_licensing_url(), __FILE__, array(
+			'version'   => WC_Autoship_Product_Page_Options_Version,
+			'license'   => $license_key,
+			'item_name' => $item_name,
+			'author'    => 'Patterns In the Cloud'
+		) );
+	} else {
+		# Display a message that wc_auto_ship plugin is not activated, so customer knows what is going on
+	}
+}
+
+add_action( 'admin_init', 'wc_as_page_options_updater', 0 );
