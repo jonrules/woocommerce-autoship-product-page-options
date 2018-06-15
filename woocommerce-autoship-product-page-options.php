@@ -3,13 +3,13 @@
 Plugin Name: WC Autoship Product Page Options
 Plugin URI: http://wooautoship.com
 Description: Customize the autoship options on the product page.
-Version: 1.0.0
+Version: 1.1.4
 Author: Patterns in the Cloud
 Author URI: http://patternsinthecloud.com
 License: Single-site
 */
 
-define( 'WC_Autoship_Product_Page_Options_Version', '1.0.0' );
+define( 'WC_Autoship_Product_Page_Options_Version', '1.1.4' );
 
 function wc_autoship_product_page_install() {
 	// Add default settings
@@ -32,6 +32,17 @@ function wc_autoship_product_page_uninstall() {
 
 }
 register_uninstall_hook( __FILE__, 'wc_autoship_product_page_uninstall' );
+
+require_once( 'src/dependency.php' );
+// Include source files
+// check is wc running
+if(wc_as_check_is_wc_running() == false) {
+	return;
+}
+
+if(wc_as_running() == false) {
+	return;
+}
 
 function wc_autoship_product_page_admin_scripts() {
 	wp_enqueue_style( 'wc-autoship-product-page-admin', plugin_dir_url( __FILE__ ) . 'css/admin.css', array(), WC_Autoship_Product_Page_Options_Version );
